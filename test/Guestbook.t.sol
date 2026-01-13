@@ -19,13 +19,13 @@ contract GuestbookTest is Test {
 
     function test_PostMessage() public {
         string memory myMessage = "Hello from Foundry!";
-        
+
         // Tells the VM that the next call comes from user1
         vm.prank(user1);
         guestbook.postMessage(myMessage);
 
         assertEq(guestbook.getTotalMessages(), 1);
-        
+
         // Check if the content is correct
         (address sender, string memory text, uint256 timestamp) = guestbook.messages(0);
         assertEq(sender, user1);
@@ -42,7 +42,7 @@ contract GuestbookTest is Test {
         // Test offset and limit
         // Get 2 messages starting from index 1
         Guestbook.Message[] memory paged = guestbook.getMessages(1, 2);
-        
+
         assertEq(paged.length, 2);
         assertEq(guestbook.getTotalMessages(), 5);
     }
@@ -52,7 +52,7 @@ contract GuestbookTest is Test {
 
         // Try to get 10 messages when only 1 exists
         Guestbook.Message[] memory paged = guestbook.getMessages(0, 10);
-        
+
         // Should return 1 message instead of crashing
         assertEq(paged.length, 1);
     }
@@ -61,7 +61,7 @@ contract GuestbookTest is Test {
         // Expect the next call to emit this specific event
         vm.expectEmit(true, false, false, true);
         emit Guestbook.NewMessage(user1, "Event Test", block.timestamp);
-        
+
         vm.prank(user1);
         guestbook.postMessage("Event Test");
     }

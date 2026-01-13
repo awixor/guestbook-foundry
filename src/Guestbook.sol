@@ -7,17 +7,13 @@ contract Guestbook {
         string message;
         uint256 timestamp;
     }
-    
+
     Message[] public messages;
 
     event NewMessage(address indexed sender, string message, uint256 timestamp);
 
     function postMessage(string memory _message) public {
-        Message memory newMessage = Message({
-            sender: msg.sender,
-            message: _message,
-            timestamp: block.timestamp
-        });
+        Message memory newMessage = Message({sender: msg.sender, message: _message, timestamp: block.timestamp});
 
         messages.push(newMessage);
 
@@ -28,19 +24,19 @@ contract Guestbook {
         if (_offset >= messages.length) {
             return new Message[](0);
         }
-        
+
         uint256 range = _limit;
 
         if (_offset + _limit > messages.length) {
             range = messages.length - _offset;
         }
-        
+
         Message[] memory pagedMessages = new Message[](range);
 
         for (uint256 i = 0; i < range; i++) {
             pagedMessages[i] = messages[_offset + i];
         }
-        
+
         return pagedMessages;
     }
 

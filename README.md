@@ -1,3 +1,21 @@
+# Guestbook Smart Contract
+
+A simple guestbook smart contract that allows users to post messages on-chain.
+
+## Features
+
+- Post messages to the guestbook
+- Retrieve paginated messages
+- View total message count
+- All messages are stored on-chain with sender address and timestamp
+
+## Deployments
+
+### Sepolia Testnet
+
+- **Contract Address**: `0xb8Ee3634253dF7BCb4ed7CD656C728327499480a`
+- **Explorer**: [View on Etherscan](https://sepolia.etherscan.io/address/0xb8Ee3634253dF7BCb4ed7CD656C728327499480a)
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
@@ -48,8 +66,10 @@ $ anvil
 ### Deploy
 
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+$ forge script script/DeployGuestbook.s.sol:DeployGuestbook --rpc-url <your_rpc_url> --broadcast --verify
 ```
+
+**Note**: Make sure to set your `PRIVATE_KEY` environment variable before deploying.
 
 ### Cast
 
